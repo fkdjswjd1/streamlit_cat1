@@ -60,7 +60,7 @@
           <tns-folder value="" />
           <tns-profile value="" />
           <files>
-            <file path="C:\workspace\streamlit_cat\database.db" schema="database" />
+            <file path="C:\workspace\streamlit_cat\mydb.db" schema="database" />
             <file path="sqlite.db" schema="main" />
           </files>
           <type value="NONE" />
