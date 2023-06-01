@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -14,6 +14,7 @@
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="cf51a8b5-b58e-49c3-a974-2313f4beb87d">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
+      <console name="mydb" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -37,11 +38,14 @@
     <last-used-operator value="EQUAL" />
     <filters />
   </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces />
+  </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
       <connection id="cf51a8b5-b58e-49c3-a974-2313f4beb87d" active="true" signed="true">
         <database>
-          <name value="Connection" />
+          <name value="mydb" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
