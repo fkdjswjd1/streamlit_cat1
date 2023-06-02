@@ -39,7 +39,6 @@ class MemberDao:
         con = sqlite3.connect('mydb.db')
         cur = con.cursor()
         try:
-
             cur.execute(f'delete from User where User_Id="{User_Id}"')
             con.commit()
             return st.write('삭제가 완료되었습니다.')
@@ -53,7 +52,7 @@ class MemberDao:
         cur = con.cursor()
         try:
 
-            cur.execute(f'update User set User_Id="{a.User_Id}", User_Pw="{a.User_Pw}", User_Name="{a.User_Name}", User_Email="{a.User_Email}", User_Phone="{a.User_Phone}"')
+            cur.execute(f'update User set User_Name="{a.User_Name}", User_Email="{a.User_Email}", User_Phone="{a.User_Phone}"')
             con.commit()
             return st.write('수정 완료되었습니다.')
         except Exception as e:

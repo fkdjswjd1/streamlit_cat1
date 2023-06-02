@@ -5,12 +5,16 @@ import streamlit as st
 class MemberService:
 
     loginId=''
-    def login_user(self):
+    def login_user(self,print=True):
         if MemberService.loginId=='':
-            st.write('로그인하고 이용하세요')
+            if print:
+                st.write('로그인하고 이용하세요')
+            return MemberService.loginId
         else:
             a = self.dao.select(MemberService.loginId)
-            st.write(a.User_Id+'님')
+            if print:
+                st.write(a.User_Name+'님:smile:')
+            return a.User_Name
     def __init__(self):
         self.dao=MemberDao()
     def addMember(self,User_Id, User_Pw, User_Name, User_Email, User_Phone):
@@ -19,42 +23,52 @@ class MemberService:
     def getById(self,User_Id):
         a:Member=self.dao.select(User_Id=User_Id)
         if a==None:
-            st.write('없는 아이디')
+            st.error('없는 아이디 입니다.', icon="🚨")
         else:
             st.write(a)
     def delMember(self,User_Id):
         if MemberService.loginId !='':
-            st.write('로그인 하세요')
+            self.dao.delete(User_Id=User_Id)
+            MemberService.loginId = ''
+        else:
+            st.error('로그인 하세요', icon="🚨")
             return
-        self.dao.delete(User_Id=User_Id)
     def login(self,User_Id,User_Pw):
         if MemberService.loginId!='':
-            st.sidebar.write('이미 로그인중')
+            st.error('이미 로그인 중 입니다. ', icon="🚨")
             return
         a=self.dao.select(User_Id=User_Id)
         if a==None:
-            st.sidebar.write('없는 아이디')
+            st.error('없는 아이디 입니다. 회원가입 하세요', icon="🚨")
             return
         else:
             if User_Pw==a.User_Pw:
                 MemberService.loginId=User_Id
-                st.sidebar.write('로그인 성공')
+                st.success('로그인 되었습니다.', icon="✅")
             else:
-                st.sidebar.write('패스워드 불일치')
+                st.error('비밀번호들 다시 입력하세요', icon="🚨")
 
     def printMyInfo(self): #정보확인 # 로그인 상태에서만 사용가능
         if MemberService.loginId=='':
-            st.write('로그인 먼저 하세요')
+            st.error('로그인 먼저 하세요', icon="🚨")
             return
         else:
             a=self.dao.select(MemberService.loginId)
-            st.write(a)
+            s = ['User_Name', 'User_Email', 'User_Phone']
+            data = [s[i] for i in range(len(s))]
+            for idx, i in enumerate(data):
+                if i != '':
+                    # 객체 멤버 변수 수정
+                    a._setattr_(s[idx], i)
+            self.dao.update(a)
+
     def logout(self):
         if MemberService.loginId=='':
-            st.sidebar.write('로그인 먼저 하세요')
+            st.error('로그인 먼저 하세요', icon="🚨")
             return
         MemberService.loginId=''
-        st.sidebar.write('로그아웃 완료!')
+        st.success('로그아웃 완료!', icon="✅")
+
 
 
 
